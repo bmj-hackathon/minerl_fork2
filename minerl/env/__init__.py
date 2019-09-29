@@ -71,6 +71,30 @@ The agent begins in a forest biome (near many trees) with an iron axe for cuttin
     reward_threshold=64.0,
 )
 
+#TODO: MJ CUSTOM ENV
+register(
+    id='MineRLTreechopLarge-v0',
+    entry_point='minerl.env:MineRLEnv',
+    kwargs={
+        'xml': os.path.join(missions_dir, 'treechopLarge.xml'),
+        'observation_space': spaces.Dict({
+            'pov': spaces.Box(low=0, high=255, shape=(320, 320, 3), dtype=np.uint8),
+        }),
+        'action_space': spaces.Dict(spaces={
+            "forward": spaces.Discrete(2),
+            "back": spaces.Discrete(2),
+            "left": spaces.Discrete(2),
+            "right": spaces.Discrete(2),
+            "jump": spaces.Discrete(2),
+            "sneak": spaces.Discrete(2),
+            "sprint": spaces.Discrete(2),
+            "attack": spaces.Discrete(2),
+            "camera": spaces.Box(low=-180, high=180, shape=(2,), dtype=np.float32),
+        }),
+    },
+    max_episode_steps=8000,
+    reward_threshold=64.0,
+)
 
 #######################
 #      NAVIGATE       #
